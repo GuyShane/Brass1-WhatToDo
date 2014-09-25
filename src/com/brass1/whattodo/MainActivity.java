@@ -7,7 +7,6 @@ import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.app.ListFragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -48,9 +47,6 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         else if (id==R.id.action_addItem) {
         	Intent add_intent=new Intent(MainActivity.this, AddActivity.class);
         	startActivity(add_intent);
-        	return true;
-        }
-        else if (id==R.id.action_selectItems) {
         	return true;
         }
         else if (id==R.id.action_emailAll) {

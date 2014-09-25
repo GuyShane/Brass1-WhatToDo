@@ -13,6 +13,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/*
+ * This class is used to get input from the user to add a
+ * new item to the to do list. The item is always added
+ * to the to do list, and can later be archived if needed
+ */
+
 public class AddActivity extends Activity {
 	private Button addOK;
 	private Button addCancel;
@@ -22,14 +28,23 @@ public class AddActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		fh=new FileHandler(AddActivity.this);
+		
 		setContentView(R.layout.activity_add);
+		
 		addOK=(Button)findViewById(R.id.add_OK);
 		addCancel=(Button)findViewById(R.id.add_cancel);
 		itemText=(TextView)findViewById(R.id.add_text);
+		
 		addOK.setEnabled(false);
 		addOK.setClickable(false);
+		
 		itemText.addTextChangedListener(new TextWatcher() {
+			/*
+			 * This is to ensure the user does not enter an empty string as a
+			 * to do item. The OK button will only be active if there is text present
+			 */
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				if(count!=0 && before==0) {
@@ -51,7 +66,9 @@ public class AddActivity extends Activity {
 		});
 		
 		addOK.setOnClickListener(new OnClickListener() {
-			
+			/*
+			 * Save the item and display the list
+			 */
 			@Override
 			public void onClick(View v) {
 				ToDoItem item=new ToDoItem(itemText.getText().toString(), false);

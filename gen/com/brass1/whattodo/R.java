@@ -33,9 +33,8 @@ public final class R {
         public static final int popup_design=0x7f020008;
     }
     public static final class id {
-        public static final int action_addItem=0x7f080021;
-        public static final int action_emailAll=0x7f080022;
-        public static final int action_selectItems=0x7f080020;
+        public static final int action_addItem=0x7f080020;
+        public static final int action_emailAll=0x7f080021;
         public static final int action_settings=0x7f08001f;
         public static final int add_OK=0x7f080004;
         public static final int add_cancel=0x7f080003;
@@ -85,37 +84,35 @@ public final class R {
         public static final int main=0x7f070001;
     }
     public static final class string {
-        public static final int action_addItem=0x7f050004;
-        public static final int action_emailAll=0x7f050005;
-        public static final int action_selectItems=0x7f050003;
-        public static final int action_settings=0x7f050002;
-        public static final int add_OK=0x7f050009;
-        public static final int add_cancel=0x7f05000a;
-        public static final int add_description=0x7f050007;
-        public static final int add_text_hint=0x7f050008;
-        public static final int app_label=0x7f050001;
-        public static final int app_name=0x7f050000;
-        public static final int archived_count=0x7f05000c;
-        public static final int button_archived_popup_cancel=0x7f050014;
-        public static final int button_archived_popup_delete=0x7f05000e;
-        public static final int button_archived_popup_email=0x7f050012;
-        public static final int button_archived_popup_unarchive=0x7f050010;
-        public static final int button_popup_cancel=0x7f050017;
-        public static final int button_popup_delete=0x7f050016;
-        public static final int button_todo_popup_archive=0x7f05000f;
-        public static final int button_todo_popup_cancel=0x7f050013;
-        public static final int button_todo_popup_delete=0x7f05000d;
-        public static final int button_todo_popup_email=0x7f050011;
-        public static final int count_summary=0x7f050018;
-        public static final int selected_archived_delete=0x7f05001c;
-        public static final int selected_archived_email=0x7f05001e;
-        public static final int selected_archived_unarchive=0x7f05001d;
-        public static final int selected_todo_archive=0x7f05001a;
-        public static final int selected_todo_delete=0x7f050019;
-        public static final int selected_todo_email=0x7f05001b;
-        public static final int text_popup_delete=0x7f050015;
-        public static final int title_activity_add=0x7f050006;
-        public static final int todo_count=0x7f05000b;
+        public static final int action_addItem=0x7f050002;
+        public static final int action_emailAll=0x7f050003;
+        public static final int action_settings=0x7f050001;
+        public static final int add_OK=0x7f050007;
+        public static final int add_cancel=0x7f050008;
+        public static final int add_description=0x7f050005;
+        public static final int add_text_hint=0x7f050006;
+        public static final int app_label=0x7f050000;
+        public static final int archived_count=0x7f05000a;
+        public static final int button_archived_popup_cancel=0x7f050013;
+        public static final int button_archived_popup_delete=0x7f05000d;
+        public static final int button_archived_popup_email=0x7f050011;
+        public static final int button_archived_popup_unarchive=0x7f05000f;
+        public static final int button_popup_cancel=0x7f050016;
+        public static final int button_popup_delete=0x7f050015;
+        public static final int button_todo_popup_archive=0x7f05000e;
+        public static final int button_todo_popup_cancel=0x7f050012;
+        public static final int button_todo_popup_delete=0x7f05000c;
+        public static final int button_todo_popup_email=0x7f050010;
+        public static final int count_summary=0x7f05000b;
+        public static final int selected_archived_delete=0x7f05001a;
+        public static final int selected_archived_email=0x7f05001c;
+        public static final int selected_archived_unarchive=0x7f05001b;
+        public static final int selected_todo_archive=0x7f050018;
+        public static final int selected_todo_delete=0x7f050017;
+        public static final int selected_todo_email=0x7f050019;
+        public static final int text_popup_delete=0x7f050014;
+        public static final int title_activity_add=0x7f050004;
+        public static final int todo_count=0x7f050009;
     }
     public static final class style {
         /** 

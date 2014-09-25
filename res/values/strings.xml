@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Brass1-WhatToDo</string>
     <string name="app_label">WhatToDo</string>
+    
     <string name="action_settings">Settings</string>
-    <string name="action_selectItems">Select items</string>
     <string name="action_addItem">Add item</string>
     <string name="action_emailAll">Email all items</string>
+    
     <string name="title_activity_add">Add item</string>
     <string name="add_description">Description:</string>
     <string name="add_text_hint">New item</string>
     <string name="add_OK">OK</string>
     <string name="add_cancel">Cancel</string>
+    
     <string name="todo_count">You have nothing to do</string>
     <string name="archived_count">You have no items archived</string>
+    <string name="count_summary">Items checked: 0 Items unchecked: 0</string>
+    
     <string name="button_todo_popup_delete">Delete</string>
     <string name="button_archived_popup_delete">Delete</string>
     <string name="button_todo_popup_archive">Archive</string>
@@ -22,10 +25,11 @@
     <string name="button_archived_popup_email">Email</string>
     <string name="button_todo_popup_cancel">Cancel</string>
     <string name="button_archived_popup_cancel">Cancel</string>
+    
     <string name="text_popup_delete">Really delete item?</string>
     <string name="button_popup_delete">Delete</string>
     <string name="button_popup_cancel">Cancel</string>
-    <string name="count_summary">Items checked: 0 Items unchecked: 0</string>
+    
     <string name="selected_todo_delete">Delete</string>
     <string name="selected_todo_archive">Archive</string>
     <string name="selected_todo_email">Email</string>
