@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -41,15 +40,83 @@ public class ArchivedFragment extends Fragment {
 		final ListView archivedList=(ListView)fragView.findViewById(R.id.archived_list);
 		archivedCount=(TextView)fragView.findViewById(R.id.archived_count);
 		
-		//final CustomAdapter adapter=new CustomAdapter(getActivity(), R.layout.item_layout_todo, items);
-		final ArrayAdapter<ToDoItem> adapter=new ArrayAdapter<ToDoItem>(getActivity(),R.layout.item_layout_archived,items);
-		//final ArrayAdapter<ToDoItem> ad=new ArrayAdapter<ToDoItem>(getActivity(),android.R.layout.simple_list_item_1,items);
+		Button selectedDelete=(Button)fragView.findViewById(R.id.selected_archived_delete);
+		Button selectedUnarchive=(Button)fragView.findViewById(R.id.selected_archived_unarchive);
+		Button selectedEmail=(Button)fragView.findViewById(R.id.selected_archived_email);
+		
+		final ArchivedAdapter adapter=new ArchivedAdapter(getActivity(),R.layout.item_layout_archived,items);
 		archivedList.setAdapter(adapter);
+		archivedList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+		
+		selectedDelete.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				for (int i=items.size()-1;i>=0;i--) {
+					if(archivedList.isItemChecked(i)) {
+						delete(i,adapter);
+					}
+				}
+				clearSelected(archivedList);
+			}
+		});
+		
+		selectedUnarchive.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				for (int i=items.size()-1;i>=0;i--) {
+					if (archivedList.isItemChecked(i)) {
+						unarchive(i,adapter);
+					}
+				}
+				clearSelected(archivedList);
+			}
+		});
+		
+		selectedEmail.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(archivedList.getCheckedItemCount()!=0) {
+					Intent emailIntent=new Intent(Intent.ACTION_SEND);
+					emailIntent.setData(Uri.parse("mailto:"));
+					emailIntent.setType("text/plain");
+					emailIntent.putExtra(Intent.EXTRA_SUBJECT, "To do item");
+					StringBuilder sb=new StringBuilder();
+					for (int i=items.size()-1;i>=0;i--) {
+						if (archivedList.isItemChecked(i)) {
+							sb.append(items.get(i).getText()+"\n");
+						}
+					}
+					String list=sb.toString();
+					emailIntent.putExtra(Intent.EXTRA_TEXT, list);
+					try {
+						startActivity(Intent.createChooser(emailIntent, "Send email"));
+					}
+					catch (android.content.ActivityNotFoundException anfe) {
+						Toast.makeText(getActivity(), "No email service found", Toast.LENGTH_SHORT).show();
+					}
+				}
+				clearSelected(archivedList);
+			}
+		});
+		
+		archivedList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				if (archivedList.isItemChecked(position)) {
+					archivedList.setItemChecked(position, true);
+				}
+				else {
+					archivedList.setItemChecked(position, false);
+				}
+			}
+		});
 		
 		archivedList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					final int position, long id) {
+				clearSelected(archivedList);
 				final LayoutInflater inflater=(LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				View popupView=inflater.inflate(R.layout.archived_popup, null);
 				final PopupWindow popup=new PopupWindow(popupView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -121,7 +188,7 @@ public class ArchivedFragment extends Fragment {
 					}
 				});
 				popup.showAtLocation(fragView, Gravity.CENTER, 0, 0);
-				return false;
+				return true;
 			}
 		});
 		
@@ -136,9 +203,28 @@ public class ArchivedFragment extends Fragment {
 		fh.saveItems(items, archivedFilename);
 	}
 	
-	public void deleteItem(ArrayList<ToDoItem> items, int position, ArrayAdapter<ToDoItem> adapter) {
+	public void deleteItem(ArrayList<ToDoItem> items, int position, ArchivedAdapter adapter) {
 		items.remove(position);
 		adapter.notifyDataSetChanged();
+	}
+	
+	private void clearSelected(ListView l) {
+		for (int i=0;i<items.size();i++) {
+			l.setItemChecked(i, false);
+		}
+	}
+	
+	private void delete(int position, ArchivedAdapter adapter) {
+		deleteItem(items, position, adapter);
+		archivedCount.setText("You have "+items.size()+" things archived");
+		fh.saveItems(items, archivedFilename);
+	}
+	
+	private void unarchive(int position, ArchivedAdapter adapter) {
+		fh.saveItem(items.get(position), toDoFilename);
+		deleteItem(items, position, adapter);
+		archivedCount.setText("You have "+items.size()+" things archived");
+		fh.saveItems(items, archivedFilename);
 	}
 
 }

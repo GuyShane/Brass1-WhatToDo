@@ -29,5 +29,9 @@
     <string name="selected_todo_delete">Delete</string>
     <string name="selected_todo_archive">Archive</string>
     <string name="selected_todo_email">Email</string>
+    <string name="selected_archived_delete">Delete</string>
+    <string name="selected_archived_unarchive">Unarchive</string>
+    <string name="selected_archived_email">Email</string>
+    
 
 </resources>

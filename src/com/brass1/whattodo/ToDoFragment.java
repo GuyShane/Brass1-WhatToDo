@@ -24,7 +24,6 @@ import android.widget.Toast;
 public class ToDoFragment extends Fragment {
 	
 	private ArrayList<ToDoItem>items;
-	//private ArrayList<Integer>selected;
 	private FileHandler fh;
 	private String toDoFilename="todo.txt";
 	private String archivedFilename="archived.txt";
@@ -51,15 +50,15 @@ public class ToDoFragment extends Fragment {
 		Button selectedArchive=(Button)fragView.findViewById(R.id.selected_todo_archive);
 		Button selectedEmail=(Button)fragView.findViewById(R.id.selected_todo_email);
 		
-		final CustomAdapter adapter=new CustomAdapter(getActivity(), R.layout.item_layout_todo, items);
-		//final ArrayAdapter<ToDoItem> ad=new ArrayAdapter<ToDoItem>(getActivity(),android.R.layout.simple_list_item_1,items);
+		final ToDoAdapter adapter=new ToDoAdapter(getActivity(), R.layout.item_layout_todo, items);
+		
 		toDoList.setAdapter(adapter);
 		toDoList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		
 		selectedDelete.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				for (int i=0;i<items.size();i++) {
+				for (int i=items.size()-1;i>=0;i--) {
 					if(toDoList.isItemChecked(i)) {
 						delete(i,adapter);
 					}
@@ -71,7 +70,7 @@ public class ToDoFragment extends Fragment {
 		selectedArchive.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				for (int i=0;i<items.size();i++) {
+				for (int i=items.size()-1;i>=0;i--) {
 					if (toDoList.isItemChecked(i)) {
 						archive(i,adapter);
 					}
@@ -89,7 +88,7 @@ public class ToDoFragment extends Fragment {
 					emailIntent.setType("text/plain");
 					emailIntent.putExtra(Intent.EXTRA_SUBJECT, "To do item");
 					StringBuilder sb=new StringBuilder();
-					for (int i=0;i<items.size();i++) {
+					for (int i=items.size()-1;i>=0;i--) {
 						if (toDoList.isItemChecked(i)) {
 							sb.append(items.get(i).getText()+"\n");
 						}
@@ -103,6 +102,7 @@ public class ToDoFragment extends Fragment {
 						Toast.makeText(getActivity(), "No email service found", Toast.LENGTH_SHORT).show();
 					}
 				}
+				clearSelected(toDoList);
 			}
 		});
 		
@@ -215,7 +215,7 @@ public class ToDoFragment extends Fragment {
 		fh.saveItems(items, toDoFilename);
 	}
 	
-	private void deleteItem(ArrayList<ToDoItem> items, int position, CustomAdapter adapter) {
+	private void deleteItem(ArrayList<ToDoItem> items, int position, ToDoAdapter adapter) {
 		items.remove(position);
 		adapter.notifyDataSetChanged();
 	}
@@ -240,7 +240,7 @@ public class ToDoFragment extends Fragment {
 		}
 	}
 	
-	private void delete(int position, CustomAdapter adapter) {
+	private void delete(int position, ToDoAdapter adapter) {
 		deleteItem(items, position, adapter);
 		toDoCount.setText("You have "+items.size()+" things to do");
 		numChecked=getNumChecked(items);
@@ -249,7 +249,7 @@ public class ToDoFragment extends Fragment {
 		fh.saveItems(items, toDoFilename);
 	}
 	
-	private void archive(int position, CustomAdapter adapter) {
+	private void archive(int position, ToDoAdapter adapter) {
 		fh.saveItem(items.get(position), archivedFilename);
 		deleteItem(items, position, adapter);
 		toDoCount.setText("You have "+items.size()+" things to do");

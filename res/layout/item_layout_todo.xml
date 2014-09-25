@@ -10,7 +10,7 @@
         	  android:layout_marginStart="8dp"
         	  android:gravity="center_vertical"
         	  android:text="@+id/item"
-        	  android:textSize="27sp">
+        	  android:textSize="20sp">
     </TextView>
 
     <CheckBox

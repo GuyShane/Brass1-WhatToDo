@@ -33,10 +33,10 @@ public final class R {
         public static final int popup_design=0x7f020008;
     }
     public static final class id {
-        public static final int action_addItem=0x7f08001d;
-        public static final int action_emailAll=0x7f08001e;
-        public static final int action_selectItems=0x7f08001c;
-        public static final int action_settings=0x7f08001b;
+        public static final int action_addItem=0x7f080021;
+        public static final int action_emailAll=0x7f080022;
+        public static final int action_selectItems=0x7f080020;
+        public static final int action_settings=0x7f08001f;
         public static final int add_OK=0x7f080004;
         public static final int add_cancel=0x7f080003;
         public static final int add_text=0x7f080002;
@@ -48,22 +48,26 @@ public final class R {
         public static final int button_archived_popup_delete=0x7f080005;
         public static final int button_archived_popup_email=0x7f080007;
         public static final int button_archived_popup_unarchive=0x7f080006;
-        public static final int button_popup_delete_cancel=0x7f080016;
-        public static final int button_popup_delete_delete=0x7f080015;
-        public static final int button_todo_popup_archive=0x7f080018;
-        public static final int button_todo_popup_cancel=0x7f08001a;
-        public static final int button_todo_popup_delete=0x7f080017;
-        public static final int button_todo_popup_email=0x7f080019;
-        public static final int check=0x7f080013;
-        public static final int count_summary=0x7f08000c;
-        public static final int item=0x7f080012;
-        public static final int selected_todo_archive=0x7f080011;
-        public static final int selected_todo_delete=0x7f08000f;
-        public static final int selected_todo_email=0x7f080010;
-        public static final int selected_todo_options=0x7f08000e;
-        public static final int text_popup_delete=0x7f080014;
-        public static final int todo_count=0x7f08000d;
-        public static final int todo_list=0x7f08000b;
+        public static final int button_popup_delete_cancel=0x7f08001a;
+        public static final int button_popup_delete_delete=0x7f080019;
+        public static final int button_todo_popup_archive=0x7f08001c;
+        public static final int button_todo_popup_cancel=0x7f08001e;
+        public static final int button_todo_popup_delete=0x7f08001b;
+        public static final int button_todo_popup_email=0x7f08001d;
+        public static final int check=0x7f080017;
+        public static final int count_summary=0x7f080010;
+        public static final int item=0x7f080016;
+        public static final int selected_archived_delete=0x7f08000c;
+        public static final int selected_archived_email=0x7f08000d;
+        public static final int selected_archived_options=0x7f08000b;
+        public static final int selected_archived_unarchive=0x7f08000e;
+        public static final int selected_todo_archive=0x7f080015;
+        public static final int selected_todo_delete=0x7f080013;
+        public static final int selected_todo_email=0x7f080014;
+        public static final int selected_todo_options=0x7f080011;
+        public static final int text_popup_delete=0x7f080018;
+        public static final int todo_count=0x7f080012;
+        public static final int todo_list=0x7f08000f;
     }
     public static final class layout {
         public static final int activity_add=0x7f030000;
@@ -103,6 +107,9 @@ public final class R {
         public static final int button_todo_popup_delete=0x7f05000d;
         public static final int button_todo_popup_email=0x7f050011;
         public static final int count_summary=0x7f050018;
+        public static final int selected_archived_delete=0x7f05001c;
+        public static final int selected_archived_email=0x7f05001e;
+        public static final int selected_archived_unarchive=0x7f05001d;
         public static final int selected_todo_archive=0x7f05001a;
         public static final int selected_todo_delete=0x7f050019;
         public static final int selected_todo_email=0x7f05001b;
