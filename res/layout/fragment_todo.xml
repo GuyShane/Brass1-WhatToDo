@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <ListView
+        android:id="@+id/todo_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/count_summary"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" >
+    </ListView>
+    
+    <TextView
+        android:id="@+id/todo_count"
+        android:text="@string/todo_count"
+        android:textSize="15sp"
+        android:textColor="#848484"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
+    
+    <TextView
+        android:id="@+id/count_summary"
+        android:text="@string/count_summary"
+        android:textSize="15sp"
+        android:textColor="#848484"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_below="@+id/todo_count"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
+    
+    <RelativeLayout android:id="@+id/selected_todo_options"
+        		  	android:layout_width="fill_parent"
+        		  	android:layout_height="wrap_content"
+        		  	android:layout_alignParentBottom="true"
+        		  	android:background="#000000"
+        		  	android:padding="5dp"
+        >
+        <Button android:id="@+id/selected_todo_delete"
+            	android:layout_width="wrap_content"
+        	 	android:layout_height="wrap_content"
+        	 	android:background="@drawable/popup_button_design"
+        	 	android:layout_alignParentStart="true"
+        	 	android:text="@string/selected_todo_delete"
+        	 	android:textColor="#ffffff"
+        	 	/>
+
+        <Button
+            android:id="@+id/selected_todo_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/popup_button_design"
+            android:text="@string/selected_todo_email"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/selected_todo_archive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/popup_button_design"
+            android:text="@string/selected_todo_archive"
+            android:textColor="#ffffff" />
+        
+    </RelativeLayout>
+
+</RelativeLayout>
