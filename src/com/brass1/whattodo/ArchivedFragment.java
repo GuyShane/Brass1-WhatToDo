@@ -35,7 +35,7 @@ public class ArchivedFragment extends Fragment {
 	
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, 
+	public View onCreateView(final LayoutInflater inflater, ViewGroup container, 
 			Bundle savedInstanceState) {
 		fragView=inflater.inflate(R.layout.fragment_archived, container,false);
 		
@@ -54,7 +54,7 @@ public class ArchivedFragment extends Fragment {
 		archivedList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		
 		selectedDelete.setOnClickListener(new View.OnClickListener() {
-			LayoutInflater inflater=(LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			//LayoutInflater inflater=(LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View deleteView=inflater.inflate(R.layout.popup_delete, null);
 			PopupWindow popup=new PopupWindow(deleteView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			@Override
@@ -154,7 +154,7 @@ public class ArchivedFragment extends Fragment {
 		fh.saveItems(items, archivedFilename);
 	}
 	
-	public void deleteItem(ArrayList<ToDoItem> items, int position, ArchivedAdapter adapter) {
+	private void deleteItem(ArrayList<ToDoItem> items, int position, ArchivedAdapter adapter) {
 		items.remove(position);
 		adapter.notifyDataSetChanged();
 	}
