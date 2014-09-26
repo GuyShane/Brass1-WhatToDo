@@ -54,26 +54,52 @@ public class ArchivedFragment extends Fragment {
 		archivedList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		
 		selectedDelete.setOnClickListener(new View.OnClickListener() {
+			LayoutInflater inflater=(LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			View deleteView=inflater.inflate(R.layout.popup_delete, null);
+			PopupWindow popup=new PopupWindow(deleteView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			@Override
 			public void onClick(View v) {
-				for (int i=items.size()-1;i>=0;i--) {
-					if(archivedList.isItemChecked(i)) {
-						delete(i,adapter);
-					}
+				if (archivedList.getCheckedItemCount()!=0) {
+					Button deleteDelete=(Button)deleteView.findViewById(R.id.button_popup_delete_delete);
+					Button deleteCancel=(Button)deleteView.findViewById(R.id.button_popup_delete_cancel);
+					TextView deleteText=(TextView)deleteView.findViewById(R.id.text_popup_delete);
+					deleteText.setText("Really delete selected?");
+					deleteDelete.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							for (int i=items.size()-1;i>=0;i--) {
+								if(archivedList.isItemChecked(i)) {
+									delete(i,adapter);
+								}
+							}
+							Toast.makeText(getActivity(), "Selected deleted", Toast.LENGTH_SHORT).show();
+							popup.dismiss();
+							clearSelected(archivedList);
+						}
+					});
+					deleteCancel.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							popup.dismiss();
+						}
+					});
+					popup.showAtLocation(fragView, Gravity.CENTER, 0, 0);
 				}
-				clearSelected(archivedList);
 			}
 		});
 		
 		selectedUnarchive.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				for (int i=items.size()-1;i>=0;i--) {
-					if (archivedList.isItemChecked(i)) {
-						unarchive(i,adapter);
+				if (archivedList.getCheckedItemCount()!=0) {
+					for (int i=items.size()-1;i>=0;i--) {
+						if (archivedList.isItemChecked(i)) {
+							unarchive(i,adapter);
+						}
 					}
+					Toast.makeText(getActivity(), "Selected unarchived", Toast.LENGTH_SHORT).show();
+					clearSelected(archivedList);
 				}
-				clearSelected(archivedList);
 			}
 		});
 		
@@ -114,86 +140,6 @@ public class ArchivedFragment extends Fragment {
 				else {
 					archivedList.setItemChecked(position, false);
 				}
-			}
-		});
-		
-		archivedList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view,
-					final int position, long id) {
-				clearSelected(archivedList);
-				final LayoutInflater inflater=(LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				View popupView=inflater.inflate(R.layout.archived_popup, null);
-				final PopupWindow popup=new PopupWindow(popupView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-				Button popupDelete=(Button)popupView.findViewById(R.id.button_archived_popup_delete);
-				Button popupUnarchive=(Button)popupView.findViewById(R.id.button_archived_popup_unarchive);
-				Button popupEmail=(Button)popupView.findViewById(R.id.button_archived_popup_email);
-				Button popupCancel=(Button)popupView.findViewById(R.id.button_archived_popup_cancel);
-				popupDelete.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						View deleteView=inflater.inflate(R.layout.popup_delete, null);
-						popup.dismiss();
-						popup.setContentView(deleteView);
-						Button deleteDelete=(Button)deleteView.findViewById(R.id.button_popup_delete_delete);
-						Button deleteCancel=(Button)deleteView.findViewById(R.id.button_popup_delete_cancel);
-						TextView deleteText=(TextView)deleteView.findViewById(R.id.text_popup_delete);
-						deleteText.setText("Really delete item\n\""+items.get(position).getText()+"\"?");
-						deleteDelete.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								deleteItem(items, position, adapter);
-								Toast.makeText(getActivity(), "Item deleted", Toast.LENGTH_SHORT).show();
-								archivedCount.setText("You have "+items.size()+" things archived");
-								popup.dismiss();
-								fh.saveItems(items, archivedFilename);
-							}
-						});
-						deleteCancel.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								popup.dismiss();
-							}
-						});
-						popup.showAtLocation(fragView, Gravity.CENTER, 0, 0);
-					}
-				});
-				popupUnarchive.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						fh.saveItem(items.get(position), toDoFilename);
-						deleteItem(items, position, adapter);
-						archivedCount.setText("You have "+items.size()+" things archived");
-						Toast.makeText(getActivity(), "Item unarchived", Toast.LENGTH_SHORT).show();
-						popup.dismiss();
-						fh.saveItems(items, archivedFilename);
-					}
-				});
-				popupEmail.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Intent emailIntent=new Intent(Intent.ACTION_SEND);
-						emailIntent.setData(Uri.parse("mailto:"));
-						emailIntent.setType("text/plain");
-						emailIntent.putExtra(Intent.EXTRA_SUBJECT, "To do item");
-						emailIntent.putExtra(Intent.EXTRA_TEXT, items.get(position).getText());
-						try {
-							startActivity(Intent.createChooser(emailIntent, "Send email"));
-						}
-						catch (android.content.ActivityNotFoundException anfe) {
-							Toast.makeText(getActivity(), "No email service found", Toast.LENGTH_SHORT).show();
-						}
-						popup.dismiss();
-					}
-				});
-				popupCancel.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						popup.dismiss();
-					}
-				});
-				popup.showAtLocation(fragView, Gravity.CENTER, 0, 0);
-				return true;
 			}
 		});
 		
