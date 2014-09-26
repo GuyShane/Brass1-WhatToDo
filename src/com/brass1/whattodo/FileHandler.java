@@ -13,6 +13,7 @@ import android.content.Context;
 public class FileHandler {
 
 	private Context context;
+	private String seperator="__,__";
 	
 	public FileHandler(Context context) {
 		this.context=context;
@@ -27,7 +28,7 @@ public class FileHandler {
 			String[] tempFields={""};
 			String line=reader.readLine();
 			while (line!=null) {
-				tempFields=line.split(",");
+				tempFields=line.split(seperator);
 				String tempText=tempFields[0];
 				boolean tempCheck=Boolean.parseBoolean(tempFields[1]);
 				tempItem=new ToDoItem(tempText, tempCheck);
@@ -48,7 +49,7 @@ public class FileHandler {
 	public void saveItem(ToDoItem item,String filename) {
 		try {
 			FileOutputStream out=context.openFileOutput(filename, Context.MODE_APPEND);
-			String toFile=item.getText()+","+String.valueOf(item.getChecked())+"\n";
+			String toFile=item.getText()+seperator+String.valueOf(item.getChecked())+"\n";
 			out.write(toFile.getBytes());
 			out.close();
 		} catch (FileNotFoundException fnf) {
@@ -63,7 +64,7 @@ public class FileHandler {
 		try {
 			FileOutputStream out=context.openFileOutput(filename, Context.MODE_PRIVATE);
 			for(ToDoItem item:items) {
-				String toFile=item.getText()+","+String.valueOf(item.getChecked())+"\n";
+				String toFile=item.getText()+seperator+String.valueOf(item.getChecked())+"\n";
 				out.write(toFile.getBytes());
 			}
 			out.close();

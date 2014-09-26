@@ -119,11 +119,11 @@ public class ArchivedFragment extends Fragment {
 		
 		archivedList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 			@Override
-			public boolean onItemLongClick(final AdapterView<?> parent, View view,
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					final int position, long id) {
 				clearSelected(archivedList);
 				final LayoutInflater inflater=(LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				View popupView=inflater.inflate(R.layout.archived_popup, parent);
+				View popupView=inflater.inflate(R.layout.archived_popup, null);
 				final PopupWindow popup=new PopupWindow(popupView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 				Button popupDelete=(Button)popupView.findViewById(R.id.button_archived_popup_delete);
 				Button popupUnarchive=(Button)popupView.findViewById(R.id.button_archived_popup_unarchive);
@@ -132,7 +132,7 @@ public class ArchivedFragment extends Fragment {
 				popupDelete.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						View deleteView=inflater.inflate(R.layout.popup_delete, parent);
+						View deleteView=inflater.inflate(R.layout.popup_delete, null);
 						popup.dismiss();
 						popup.setContentView(deleteView);
 						Button deleteDelete=(Button)deleteView.findViewById(R.id.button_popup_delete_delete);
