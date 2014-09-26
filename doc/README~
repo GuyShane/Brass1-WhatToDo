@@ -1,0 +1,3 @@
+This is a simple to do list application, where the user can add items,
+check off completed items, and archive them.
+The app also allows the user to delete and email items.

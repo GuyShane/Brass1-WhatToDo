@@ -1,0 +1,23 @@
+This is a simple to do list application, where the user can add items,
+check off completed items, and archive them.
+The app also allows the user to delete and email items.
+
+There are tabs to allow the user to switch between viewing current
+to do items and archived items.
+At the top of each of those views there are summaries of relevant
+information.
+The user can click on an item's checkbox to mark it as done or 
+not done in the to do view.
+To perform other actions, the user can click on an item to highlight it,
+and any others as well, and then use the buttons at the bottom of
+the screen to either delete, archive, or email the selected items.
+In the action bar are options to add an item, or to email the entire
+list.
+
+The two main helper classes I made are ToDoItem and FileHandler.
+
+ToDoItem is a data class, used to store items to be displayed.
+It stores the item's text, and whether or not it is checked.
+
+FileHandler deals with writing to and reading from a local file
+for data persistence.
